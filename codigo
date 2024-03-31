@@ -1,0 +1,55 @@
+# Define o menu do sistema bancário
+menu = '''
+[1] Depositar
+[2] Sacar
+[3] Extrato
+[4] Sair
+
+=> '''
+
+# Variáveis iniciais
+saldo = 0
+limite = 500
+numero_saques = 0
+LIMITE_SAQUES = 3
+
+# Loop principal do sistema bancário
+while True:
+    # Mostra o menu e aguarda a entrada do usuário
+    opcao = input(menu)
+
+    # Opção para depositar
+    if opcao == '1':
+        valor_deposito = float(input("Digite o valor a depositar: $"))
+        saldo += valor_deposito
+        print(f"Depósito de ${valor_deposito:.2f} realizado com sucesso.")
+        print(f"Saldo atual: ${saldo:.2f}")
+
+    # Opção para sacar
+    elif opcao == '2':
+        if numero_saques < LIMITE_SAQUES:
+            valor_saque = float(input("Digite o valor a sacar: $"))
+            if saldo - valor_saque >= 0:
+                saldo -= valor_saque
+                numero_saques += 1
+                print(f"Saque de ${valor_saque:.2f} realizado com sucesso.")
+                print(f"Saldo atual: ${saldo:.2f}")
+            else:
+                print("Saldo insuficiente.")
+        else:
+            print("Limite de saques atingido.")
+
+    # Opção para exibir o extrato
+    elif opcao == '3':
+        print(f"Saldo: ${saldo:.2f}")
+        print(f"Limite de crédito: ${limite:.2f}")
+        print(f"Número de saques realizados: {numero_saques}/{LIMITE_SAQUES}")
+
+    # Opção para sair do sistema
+    elif opcao == '4':
+        print("Saindo...")
+        break
+
+    # Trata entrada inválida
+    else:
+        print("Opção inválida. Por favor, escolha uma opção válida.")
